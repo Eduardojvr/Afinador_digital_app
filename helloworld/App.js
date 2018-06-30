@@ -1,38 +1,49 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
+import { AppRegistry, Image } from 'react-native';
 import {
-  Platform,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+// class Rodape extends Component{
+//   render(){
+//     return (
+//       <View style={styles.container}>
+//         <Text style={styles.downBar}>
+//             Created by Creativex
+//         </Text> 
+//       </View>  
+//     );
+//   }
+// }
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component<{}> {
+  constructor(props){
+    super(props);
+    this.state = {isShowingText: true};
+  
+    // Toggle the state every second
+    setInterval(() => {
+      this.setState(previousState => {
+        return { isShowingText: !previousState.isShowingText };
+      });
+    }, 500);
+  } 
   render() {
+    let display = this.state.isShowingText ? this.props.text : ' ';
+    let pic = {
+      uri: 'https://i.imgur.com/1A9ZvHC.png'
+    };
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+      <Image source={pic} style={{width: 293, height: 210}}/>
+        <Text style={styles.tap}>
+          Toque para iniciar{display}
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Text style={styles.downBar}>
+            Created by Creativex
+        </Text> 
       </View>
     );
   }
@@ -46,13 +57,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 80,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  tap:{
+    fontSize: 30
+    
+  },
+  downBar:{
+    fontSize: 10,
+    margin: 10
   },
 });
